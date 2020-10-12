@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *
 .config/*
 !.config/
@@ -12,15 +13,67 @@
 !.tmux.conf
 !.vimrc
 !.xinitrc
+=======
+# ignore everything in home
+*
+
+# Append files you don't want to be ignored
+.config/*
+!.config/
+!.config/*/*
+
+# 2bwm 
+!.config/2bwm/config.h
+
+# kitty terminmal
+!.config/kitty/kitty.conf
+
+# polybar
+!.config/polybar/
+!.config/polybar/*
+!.config/polybar/colors.ini
+!.config/polybar/modules.ini
+!.config/polybar/polybar.config
+
+# redshift
+!.config/redshift/redshift.conf
+
+# rtv default applications 
+!.mailcap
+
+# spectrwm
+!.spectrwm.conf
+
+# tmux
+!.tmux.conf
+
+# vim/gvim
+!.vimrc
+
+# x startup
+!.xinitrc
+
+# zsh
+>>>>>>> 645785095de739a76a80eadcb1e08845016ec1fa
 .zsh/*
 !.zsh/
 !.zsh/.zshrc
 !.zsh/.zshrc.aliases
 !.zshenv
 !README.md
+<<<<<<< HEAD
+=======
+
+# scripts directory 
+>>>>>>> 645785095de739a76a80eadcb1e08845016ec1fa
 .scripts/*
 !scripts/
 !scripts/polybar_launch.sh
 !scripts/setWallpaper.sh
 !scripts/xidlehookLock.sh
+<<<<<<< HEAD
+=======
+
+# gitignore
+>>>>>>> 645785095de739a76a80eadcb1e08845016ec1fa
 !.gitignore
