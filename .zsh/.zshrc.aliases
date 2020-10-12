@@ -1,0 +1,38 @@
+# System aliases
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+alias lf="ls -lahG | grep -v '^d' --color=auto"
+alias ldir='ls -d */'
+alias pacrepo='sudo reflector -l 20 -f 10 --save /etc/pacman.d/mirrorlist'
+alias pacman='sudo pacman'
+alias journalctl='sudo journalctl'
+alias pacu='sudo pacman -Syu && yay -Sc'
+alias se='ls /usr/bin | grep'
+alias enabledSrvc='systemctl list-unit-files --state=enabled'
+alias disabledSrvc='systemctl list-unit-files --state=disabled'
+alias listSrvc='systemctl list-unit-files | grep'
+
+# User aliases 
+alias rm='rm -I'													
+alias cat='ccat'													
+alias cls="printf '\033c'"											
+alias i3edit="vim ~/.config/i3/config"
+alias i3stat='vim ~/.config/i3status/config'
+alias xSave="xrdb .Xresources"
+alias class="xprop | grep 'CLASS'"
+alias reloadDunst='killall dunst; notify-send testing'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias pipu='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U '
+alias suspendctl='sudo systemctl suspend'
+alias listDots='dotfiles ls-tree -r HEAD --name-only'
+alias addDots='dotfiles add $(dotfiles ls-files --modified)'
+alias displayList='xrandr --query | grep " connected" | cut -d" " -f1'
+alias ssh='TERM=xterm-256color ssh'
+alias icat='kitty +kitten icat'
+alias serve='browser-sync start --server --files .'
+alias update2b='(cd $HOME/.local/src/2bwm/ && make && sudo make install)'
+alias gnomeWay='XDG_SESSION_TYPE=wayland exec dbus-run-session gnome-session'
+alias bt+='bluetoothctl connect'
+alias bt-='bluetoothctl disconnect'
+alias zathura='zathura --fork'
+alias paclist="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
