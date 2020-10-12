@@ -1,4 +1,4 @@
-source /usr/share/zsh/share/antigen.zsh
+source $ZDOTDIR/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle git
@@ -39,7 +39,6 @@ unsetopt correct_all
 
 stty -ixon
 autoload -Uz compinit && compinit -i
-kitty + complete setup zsh | source /dev/stdin
 
 antigen apply
 

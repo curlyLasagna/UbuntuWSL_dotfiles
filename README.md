@@ -1,2 +1,2 @@
-# desktopLinuxDotFiles
-Arch linux dotfiles for desktop use
+# Ubuntu WSL dotfiles
+Ubuntu WSL dotfiles for my Windows laptop
