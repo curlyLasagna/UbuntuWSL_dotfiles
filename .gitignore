@@ -1,4 +1,4 @@
-*
+/*
 
 # rtv default applications 
 !.mailcap
@@ -10,12 +10,17 @@
 !.vimrc
 
 # zsh
-.zsh/*
+/.zsh/*
 !.zsh/
 !.zsh/.zshrc
 !.zsh/.zshrc.aliases
 !.zshenv
 !README.md
+
+# scripts
+/scripts/*
+!/scripts/
+!/scripts/bootstrap.sh
 
 # gitignore
 !.gitignore

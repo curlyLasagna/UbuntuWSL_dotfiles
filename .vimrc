@@ -3,10 +3,6 @@ call plug#begin('~/.vim/plugged')
 " Linting
 Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf.vim'
-" Cool status line 
-Plug 'itchyny/lightline.vim'
-" YouCompleteMe
-Plug 'valloric/youcompleteme'
 " Directory listing
 Plug 'scrooloose/nerdtree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -27,18 +23,14 @@ Plug 'tpope/vim-commentary'
 " Distraction-less vim
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-" Prettier formatting
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 " ctrl + / like commenting from IDE's
 Plug 'preservim/nerdcommenter'
-" Bunch of colorschemes
-Plug 'flazz/vim-colorschemes'
 " CSS color
 Plug 'ap/vim-css-color'
 " Easy Motion
 Plug 'easymotion/vim-easymotion'
-" Js syntax highlighting
-Plug 'pangloss/vim-javascript'
+" Synatax highlighting
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()            
 
@@ -46,60 +38,21 @@ call plug#end()
 	"Plugin configurations"
 "*************************"
 
-" Autostart NerdTree when creating new file
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Autostart NerdTree when creating new file and focus on file instead of
+" NERDTree
+autocmd VimEnter * NERDTree | wincmd p 
+" Closes vim if the only window open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" NERDTree window starting size
 let g:NERDTreeWinSize=25
-
-set completeopt-=preview
-
-" lightline options
-set laststatus=2
-set noshowmode
-let g:lightline = {
-	\ 'colorscheme': 'seoul256',
-	\ }
 
 " Set indent char 
 let g:indentLine_char = '|'
 
-" Prettier leader key trigger
-let g:prettier#autoformat_require_pragma = 0
+colo elflord
+syntax on
 
-" YCM configuration
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_max_num_candidates = 15
-let g:ycm_auto_hover = ''
-let g:ycm_auto_trigger = 1
 
-"*************************"
-			"gvim settings"
-"*************************"
-if has("gui_running")
-" Gui colorscheme
-	colo mountaineer
-	set guioptions -=m
-	set guioptions -=T
-else 
-	" Terminal colorscheme
-	colo woju
-	syntax on
-endif
-
-"*************************"
-			"Custom keymaps "
-"*************************"
-
-"*************************"
-			"Custom Commands"
-"*************************"
-
-" CDC = Change to Directory of Current file
-command CDC cd %:p:h
- 
-"*************************"
-	"Vim user configurations"
-"*************************"
 
 " Line numbers
 set number
@@ -111,15 +64,23 @@ set clipboard=unnamed
 set mouse=a
 
 " Tabbing options
-set shiftwidth=2 
-set tabstop=2
-set smarttab
+set sw=4 ts=4 sts=4 sta et
+
+" Cursor jumps to the matching brace when inserted
+set showmatch
+
+" Sets the cursor to a line on insert
+let &t_SI = "\e[6 q"
+let &t_SI = "\e[2 q"
+
+" Maintains VisualMode after indenting with < or >
+vmap < <gv
+vmap > >gv
 
 " Set leader key
 let mapleader=";"
 set timeoutlen=2000
 
-" Remaps
 " Yank to system clipboard
 nnoremap <leader>y :"+y
 nnoremap <leader>w :w <Return>
@@ -130,22 +91,23 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " save file with admin rights
 noremap <leader>W :w !sudo tee % > /dev/null 
 " Plugin leader keys
-nmap <leader>D <plug>(YCMHover)
 nmap <Leader>py <Plug>(Prettier)
 " hjkl motions
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
+" keep cursor column when JK motion
+let g:EasyMotion_startofline = 0 
 
-let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 " vim-Terminal configuration
-set termwinsize=30*0
-" new split panes start at the bottom. Default top
-set splitbelow
+set termwinsize=30*0 splitbelow
+" New split panes start at the bottom and to the right.
+set sb spr
 
 set encoding=utf-8
-set termguicolors
+" Back up directories
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
-" .rasi syntax highlighting
-au BufNewFile,BufRead /*.rasi setf css
